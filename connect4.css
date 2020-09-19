@@ -1,0 +1,121 @@
+/* game board table */
+body {
+	background-image: url("wood_lights.jpeg");
+	background-size: 100% 140%;
+}
+h1 {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	top: 40px;
+	font-family: 'Righteous', cursive;
+	font-size: 3rem;
+	color: blanchedalmond;
+	opacity: .8;
+	text-shadow: -1px -1px 0 rgba(0, 0, 0, .2), 1px -1px 0 rgba(0, 0, 0, .2), -1px 1px 0 rgba(0, 0, 0, .2),
+		1px 1px 0 rgba(0, 0, 0, .2);
+}
+#game {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	top: 40px;
+}
+#board td {
+	width: 50px;
+	height: 50px;
+	border: solid 1px #666;
+}
+
+tr:not(:first-child) {
+	background-image: url("wood.jpeg");
+	opacity: .6;
+	background-size: cover;
+}
+
+/* pieces are div within game table cells: draw as colored circles */
+
+.piece {
+	/* TODO: make into circles */
+	margin: 5px;
+	width: 80%;
+	height: 80%;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+}
+
+/* TODO: make pieces red/blue,  depending on player 1/2 piece */
+.p1 {
+	background-color: rgb(0, 95, 158);
+}
+
+.p2 {
+	background-color: rgb(214, 36, 36);
+}
+/* column-top is table row of clickable areas for each column */
+
+#column-top td {
+	border: dashed 1px lightgray;
+}
+
+#column-top td:hover {
+	background-color: rgba(35, 182, 182, 0.4);
+}
+
+@media (max-width: 415px) {
+	body {
+		background-size: 100% 150%;
+	}
+	#board td {
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+	.piece {
+		margin: 4px;
+	}
+}
+@media (max-width: 340px) {
+	body {
+		background-size: 100% 200%;
+	}
+	#board td {
+		width: 1.7rem;
+		height: 1.7rem;
+	}
+	.piece {
+		margin: 3px;
+	}
+}
+
+@media (max-width: 250px) {
+	body {
+		background-size: 100% 250%;
+	}
+	#board td {
+		width: 1.3rem;
+		height: 1.3rem;
+	}
+	h1 {
+		font-size: 2rem;
+	}
+	.piece {
+		margin: 2.4px;
+	}
+}
+
+@media (max-width: 206px) {
+	body {
+		background-size: 100% 290%;
+	}
+	#board td {
+		width: 1rem;
+		height: 1rem;
+	}
+	h1 {
+		font-size: 1.5rem;
+	}
+	.piece {
+		margin: 2px;
+	}
+}
