@@ -4,39 +4,43 @@
  * column until a player gets four-in-a-row (horiz, vert, or diag) or until
  * board fills (tie)
  */
-
+const body = document.querySelector('body');
+const startGame = document.getElementById('startgame');
+startGame.addEventListener('submit', beginGame);
 let WIDTH = 7;
 let HEIGHT = 6;
-
 let currPlayer = 1; // active player: 1 or 2
-// const board = []; // array of rows, each row is array of cells  (board[y][x])
+let board1 = []; // array of rows, each row is array of cells  (board[y][x])
+
+body.classList.add('introImg');
 function beginGame(evt) {
 	evt.preventDefault();
-	const widthInput = document.querySelector('#boardwidth');
-	const heightInput = document.querySelector('#boardheight');
+	const widthInput = document.getElementById('boardwidth');
+	const heightInput = document.getElementById('boardheight');
 
 	WIDTH = widthInput.value;
 	HEIGHT = heightInput.value;
 
 	if (!document.getElementById('column-top')) {
+		board1 = makeBoard(HEIGHT, WIDTH);
+		body.classList.remove('introImg');
+		makeHtmlBoard();
 	}
 }
+
 function restartGame(e) {
 	window.location.reload();
 }
 
 function makeBoard(HEIGHT, WIDTH) {
 	let board = [];
-
-	// TODO: set "board" to empty HEIGHT x WIDTH matrix array
-	for (let y = 0; y < height; y++) {
-		board.push(Array.from({ length: width }));
+	for (let y = 0; y < HEIGHT; y++) {
+		board.push(Array.from({ length: WIDTH }));
 	}
 	return board;
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
-
 function makeHtmlBoard() {
 	const htmlBoard = document.querySelector('#board');
 	// create a table row at the top that listens for click events
@@ -67,13 +71,11 @@ function makeHtmlBoard() {
 	restartBtn.setAttribute('id', 'restartBtn');
 	restartBtn.innerText = 'Restart';
 	restartBtn.addEventListener('click', restartGame);
-	container.append(restartBtn);
+	startGame.append(restartBtn);
 }
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
-
 function findSpotForCol(x) {
-	// TODO: write the real version of this, rather than always returning 0
 	for (let y = HEIGHT - 1; y >= 0; y--) {
 		if (!board1[y][x]) {
 			return y;
@@ -83,9 +85,7 @@ function findSpotForCol(x) {
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
-
 function placeInTable(y, x) {
-	// TODO: make a div and insert into correct table cell
 	const piece = document.createElement('div');
 	piece.classList.add('piece');
 	piece.classList.add(`p${currPlayer}`);
@@ -95,7 +95,6 @@ function placeInTable(y, x) {
 }
 
 /** endGame: announce game end */
-
 function endGame(msg) {
 	// TODO: pop up alert message
 	setTimeout(function() {
@@ -104,7 +103,6 @@ function endGame(msg) {
 }
 
 /** handleClick: handle click of column top to play piece */
-
 function handleClick(evt) {
 	// get x from ID of clicked cell
 	let x = parseInt(evt.target.id);
@@ -116,25 +114,29 @@ function handleClick(evt) {
 	}
 
 	// place piece in board and add to HTML table
-	// TODO: add line to update in-memory board
 	// board[y][x] is the location found for the piece on that click evt, fill it with a piece that is color of currPlayer
 	board1[y][x] = currPlayer;
 	placeInTable(y, x);
 
-	// check for win
 	if (checkForWin()) {
 		return endGame(`Player ${currPlayer} won!`);
 	}
 
-	// check for tie
-	// TODO: check if all cells in board are filled; if so call, call endGame
-	if (board1.every((row) => row.every((cell) => cell))) {
+	if (checkForTie(board1)) {
 		return endGame('Tie!');
 	}
 
-	// switch players
-	// TODO: switch currPlayer 1 <-> 2
-	currPlayer = currPlayer === 1 ? 2 : 1;
+	currPlayer = switchPlayers(currPlayer);
+}
+
+function checkForTie(board) {
+	if (board.every((row) => row.every((cell) => cell))) {
+		return true;
+	}
+}
+
+function switchPlayers(currplayer) {
+	return currPlayer === 1 ? 2 : 1;
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -147,7 +149,6 @@ function _win(cells) {
 }
 
 function checkForWin() {
-	// TODO: read and understand this code. Add comments to help you.
 	/* saving 4 adjacent spaces to a variable describing their position relationship. 
   Nested Loop: y loop defines which row we are looping through with second loop (x) to test every possible combination
   defined in horiz, vert, diagDR, diagDL, which are all passed in to _win()
@@ -165,8 +166,3 @@ function checkForWin() {
 		}
 	}
 }
-
-const board1 = makeBoard(HEIGHT, WIDTH);
-// board2 created for testing purposes only
-const board2 = makeBoard(3, 4);
-makeHtmlBoard();

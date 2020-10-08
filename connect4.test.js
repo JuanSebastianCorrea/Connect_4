@@ -1,31 +1,38 @@
 describe('make js board function tests', function() {
-	it('should create an array', function() {
-		expect(Array.isArray(makeBoard(5, 6))).toEqual(true);
+	it('should return an array with same number of elements as HEIGHT', function() {
+		expect(makeBoard(1000, 10).length).toEqual(1000);
 	});
 
-	it('should create an array of rows (y)', function() {
-		expect(Array.isArray(board1)).toEqual(true);
-	});
-
-	it('should create an array of of cells (x) for each row (y)', function() {
-		expect(Array.isArray(board1[0])).toEqual(true);
-	});
-
-	it('should make a board the size of values (height, width) passed', function() {
-		expect(board1.length).toEqual(6);
-		expect(board1[0].length).toEqual(7);
-		expect(board1[5].length).toEqual(7);
-
-		expect(board2.length).toEqual(3);
-		expect(board2[0].length).toEqual(4);
-		expect(board2[2].length).toEqual(4);
-
-		expect(makeBoard(7, 8).length).toEqual(7);
-		expect(makeBoard(7, 8)[6].length).toEqual(8);
-
-		expect(makeBoard(HEIGHT, WIDTH).length).toEqual(HEIGHT);
-		expect(makeBoard(HEIGHT, WIDTH)[5].length).toEqual(WIDTH);
+	it('should return same WIDTH for every element in arr', function() {
+		const result = makeBoard(1000, 1000).map((e) => e.length).every(function(e) {
+			return e === 1000;
+		});
+		expect(result).toEqual(true);
 	});
 });
 
-describe('switch players test', function() {});
+describe('switch players test', function() {
+	it('should return 2 since currPlayer === 1', function() {
+		currPlayer = 1;
+		expect(switchPlayers(1)).toEqual(2);
+	});
+	it('should return 1 since currPlayer === 2', function() {
+		currPlayer = 2;
+		expect(switchPlayers(2)).toEqual(1);
+	});
+});
+
+describe('check for tie test', function() {
+	it('should return true when all cells in every row are filled with a truthy value', function() {
+		let tieBoard = [
+			[ 1, 1, 2, 3, 5 ],
+			[ 1, 2, 3, 4, 5 ],
+			[ 1, 2, 3, 4, 5 ],
+			[ 1, 2, 3, 4, 5 ],
+			[ 1, 2, 3, 4, 5 ]
+		];
+		expect(checkForTie(tieBoard)).toEqual(true);
+	});
+
+	// it('should return false when not all cells in every row are filled with a truthy value', function() {});
+});
