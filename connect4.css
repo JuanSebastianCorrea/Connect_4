@@ -1,11 +1,11 @@
 /* game board table */
 .introImg {
 	background-image: url("wood_lights.jpeg");
-	background-size: 100% 500%;
+	background-size: 100% 555%;
 }
 body {
 	background-image: url("wood_lights.jpeg");
-	background-size: 100% 150%;
+	background-size: 100% 152.5%;
 }
 h1 {
 	display: flex;
