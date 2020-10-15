@@ -119,10 +119,9 @@ input {
 #column-top td:hover {
 	background-color: rgba(35, 182, 182, 0.4);
 }
-
 @media (max-width: 415px) {
 	body {
-		background-size: 100% 150%;
+		background-size: 100% 200%;
 	}
 	#board td {
 		width: 2.5rem;
@@ -142,10 +141,10 @@ input {
 @media (max-width: 378px) {
 	#startBtn {
 		width: 100px;
-		left: -20px;
+		left: -5px;
 	}
 	#restartBtn {
-		left: -20px;
+		left: -10px;
 	}
 }
 
@@ -179,15 +178,10 @@ input {
 		font-size: 14px;
 	}
 }
-@media (max-width: 307px) {
-	#startBtn {
-		top: 10px;
-	}
-}
+
 @media (max-width: 258px) {
 	#startBtn {
-		height: 25px;
-		top: 2.5px;
+		top: 0px;
 	}
 }
 
@@ -210,7 +204,7 @@ input {
 		margin: 2.4px;
 	}
 	#startBtn {
-		top: 8px;
+		top: 15px;
 	}
 	#restartBtn {
 		top: 10px;
@@ -219,14 +213,6 @@ input {
 		font-size: 12px;
 	}
 }
-
-@media (max-width: 225px) {
-	#startBtn {
-		margin-top: 10px;
-		top: 0px;
-	}
-}
-
 @media (max-width: 206px) {
 	body {
 		background-size: 100% 290%;
@@ -240,5 +226,19 @@ input {
 	}
 	.piece {
 		margin: 2px;
+	}
+}
+@media (max-width: 195px) {
+	#startBtn {
+		width: 100px;
+		height: 15px;
+		top: 15px;
+	}
+}
+@media (max-width: 168px) {
+	#startBtn {
+		width: 100px;
+		height: 25px;
+		top: 10px;
 	}
 }
